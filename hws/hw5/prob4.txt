@@ -1,0 +1,67 @@
+Note: Your work will be most likely be viewed using an editor. For this
+reason DO NOT assume any special formatting abilities will be at work
+when it is viewed. IN PARTICULAR, PUT IN LINE BREAKS AT REASONABLE
+PLACES AND DO NOT USE TABS.
+
+
+Solution to Problem 4
+=====================
+
+The definitions of the reverse and length functions:
+
+let rec rev lst1 lst2 =
+   match lst1 with
+   |  [] -> lst2
+   |  (h::t) -> rev t (h::lst2)
+
+let reverse lst = in rev lst []
+
+let rec length lst =
+   match lst with
+   | [] -> 0
+   | (h::t) -> (length t) + 1
+
+
+Solution to Part (a)
+--------------------
+
+for all lists l1, for all lists l2, (length (rev l1 l2)) = (length l1) + (length l2)
+P(l1) is what I'm going to be using
+
+
+Solution to Part (b)
+--------------------
+
+Base Case: P([]) -> (length (rev [] l2)) = (length []) + (length l2)
+By the definition of rev, when l1 is [], rev returns l2, so our equation becomes
+(length (l2)) = (length []) + (length l2) and by the definition of length,
+(length []) is 0, so our equation is:
+(length l2) = (length l2), and both sides have the same termination values and behaviors,
+so the Base Case Holds
+
+Inductive Step: Assume P(l1)
+Prove P(h::l1) -> (length (rev (h::l1) l2)) = (length (h::l)) + (length l2)
+By the definition of rev, (rev (h::l1) l2) can be changed into (rev l1 (h::l2))
+So, our equation now looks like:
+(length (rev l1 (h::l2))) = (length (h::l)) + (length l2)
+Using the induction hypothesis (P(l1)), the left side evaluates to
+whatever (length l1) + (length(h::l2)) evaluates to
+By the definition of length, (length (h::l1)) can be changed into (length l1) + 1
+and (length (h::l2)) can be changed into (length l2) + 1
+Now our equation is:
+(length l1) + (length l2) + 1 = (length l1) + (length l2) + 1, now both sides
+have the same termination values, so the Inductive Step is proven
+
+Solution to Part (c)
+--------------------
+
+The property for reverse and length to be proved:
+   for all lists l, (length (reverse l)) = (length l).
+
+For all lists l, (length (reverse l)) evaluates to whatever (length (rev l [])) evaluates to
+by the definition of reverse. Shown in part b, (length (rev l [])) evaluates to
+whatever (length l) + (length []) evaluates to. Our equation now looks like:
+(length l) + (length []) = (length l), and since (length []) is 0,
+the equation is:
+(length l) = (length l), and both sides have the same termination values and behaviors
+proving the original equation.

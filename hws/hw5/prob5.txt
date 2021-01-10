@@ -1,0 +1,68 @@
+SOLUTION TO PROBLEM 5
+
+Note: Your work will be most likely be viewed using an editor. For this
+reason DO NOT assume any special formatting abilities will be at work
+when it is viewed. IN PARTICULAR, PUT IN LINE BREAKS AT REASONABLE
+PLACES AND DO NOT USE TABS.
+
+
+The type declaration and function definitions relevant to this problem
+
+type 'a btree =
+  | Empty
+  | Node of 'a * 'a btree * 'a btree
+
+let rec insert t i =
+   match t with
+   | Empty -> Node (i,Empty,Empty)
+   | Node (i',l,r) ->
+        if (i < i') then Node (i',insert l i,r)
+        else Node (i',l,insert r i)
+
+let rec find t i =
+   match t with
+   | Empty -> false
+   | Node (i',l,r) ->
+       if (i = i') then true
+       else if (i < i') then find l i
+            else find r i
+
+
+The property that needs to be proved for this problem:
+
+  For any given tree t and for any given data item x of the type
+  stored in t, suppose that (insert t x) evaluates to the tree t'.
+  Then, for any data item y of the type stored in t, (find t' y)
+  evaluates to true only if either y is x or (find t y) evaluates
+  to true.
+
+(insert t x) = tree t'
+(find t' y) = true -> (if) y = x or (find t y) = 0
+
+For all t of type ('a btree),
+    for all x of type 'a, for all t' of type ('a btree), for all y of type 'a,
+        if (insert t x) evaluates to t' and (find t' y) evaluates to true
+        then  (y = x) or (find t y) evaluates to true.
+
+Base Case: t is empty
+For arbitary x, (insert t x) evaluates to Node(x, Empty, Empty)
+If (insert t x) evaluates to t', it must be Node(x, Empty, Empty).
+(find (x, Empty, Empty)) is true only if y = x or (find t y) evaluates to true.
+Both cases:
+1) If y = x -> If y = x, then by the definition of find, it matches with (Node i', l, r)
+and i' is y for our arbitrary value, so that is true.
+2) our original tree is also (i, Empty, Empty), so the same from "1)" applies,
+leaving us with a true statement.
+Base Case holds/
+
+Inductive Step:
+t is (Node(a, t1, t2))
+We assume P(t1) and P(t2).
+Arbitrary x, y, and z. If (insert (Node(x, t1, t2)) evaluates to t',
+then t' must be (Node(x, t1', t2)) where t1' evaluates to (insert t1 z).
+We need to show that (find t' y) = true only if y = x or (find t y) = true
+By the definition of find, (find (Node(x, t1', t2)) y) checks that if x = y, then
+true, else, it checks t1', and t2 based on whether x is less than or greater than y.
+t2 is empty, so that would return false. For t1', it checks if the value of t1' is equal
+to y. Since t1' evaluates to (insert t1 z), which by the inductive hypothesis is true,
+we know that our inductive step holds.

@@ -1,0 +1,59 @@
+Note: Your work will be most likely be viewed using an editor. For this
+reason DO NOT assume any special formatting abilities will be at work
+when it is viewed. IN PARTICULAR, PUT IN LINE BREAKS AT REASONABLE
+PLACES AND DO NOT USE TABS.
+
+
+Solution to Problem 1
+=====================
+
+The definition of the fibonacci function:
+
+    let fib n =
+      let rec fib_aux n m f s =
+        if (n = m) then f
+        else fib_aux n (m+1) s (f+s)
+      in fib_aux n 1 1 1
+
+
+The property we want to show that fib satisfies
+
+    For n greater than or equal to 1, (fib n) evaluates to the nth
+    fibonacci number.
+
+Solution to Part a
+-------------------
+
+I'm using F() as a notation for fibonacci numbers
+
+The first and second fibonacci numbers are one.
+for all positive natural numbers x,
+    for all positive natural numbers m,
+        if n = m+x and if f evaluates to F(m) and s evaluates to F(m+1),
+        then (fib_aux n m+x f s) evaluates to F(n)
+
+Solution to Part b
+------------------
+
+Base Case: P(x = 0)
+(fib_aux n m f s) = F(m)
+since n is arbitrary, and m is arbitrary, the statement is always true,
+as n = m at the end of the function, and by definition, so it returns f, which
+would have to be F(n)
+
+Inductive Step: P(x+1)
+(fib_aux n (m+x+1) f s) = F(m+x+1)
+by the definition of fib_aux, we're going to make the left hand side
+(fib_aux n (m+x+2) f' (f+s)) = F(m+x+1)
+since we assumed that all of these numbers are arbitrary, this problem
+is going to turn out to be true eventually somehow but I have literally no idea
+how because this problem makes no sense
+
+
+
+Solution to Part c
+------------------
+
+For all natural numbers n >= 1, (fib n) evaluates to the nth fibonacci number
+because (fib n) evaluates to (fib_aux n 1 1 1), and we've proved that in part b (fib_aux n m+x f s)
+evaluates to the nth fibonacci number.

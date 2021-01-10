@@ -1,0 +1,56 @@
+(* Solution to Problem 5, Homework 2, CSci 2041, Spring 2020 *)
+
+(* The type declarations included with the problem writeup. *)
+
+type ty = BoolTy | IntTy | FunTy of ty * ty
+
+type expr =
+       Id of string                     (* for identifiers *)
+     | Int of int                       (* for integers *)
+     | True                             (* for the boolean value true *)
+     | False                            (* for the boolean value false *)
+     | Plus of expr * expr              (* for exp1 + exp2 *)
+     | Minus of expr * expr             (* for exp1 - exp2 *)
+     | Times of expr * expr             (* for exp1 * exp2 *)
+     | Div of expr * expr               (* for exp1 / exp2, division being for integers *)
+     | Lss of expr * expr               (* for exp1 < exp2 *)
+     | Eq of expr * expr                (* for exp1 = exp2, = being equality comparison *)
+     | Gtr of expr * expr               (* for exp1 > exp2 *)
+     | And of expr * expr               (* for exp1 && exp2 *)
+     | Or of expr * expr                (* for exp1 || exp2 *)
+     | Not of expr                      (* for not exp *)
+     | Cond of expr * expr * expr       (* for if exp1 then exp2 else exp3 *)
+     | Let of string * expr * expr      (* for let <id> = exp1 in exp2 *)
+     | Fun of string * ty * expr        (* for fun (x:ty) -> exp *)
+     | App of expr * expr               (* for (exp1 exp2) *)
+
+
+(* Solution to Part 1 *)                                  
+
+let exp1 = Let(x, Int(5), (Let(y, Int(7), Plus(x, y)))
+
+let exp2 = Fun(x, IntTy, Fun(y, BoolTy, (Cond(y, (Plus(x, 1)), (Minus(x, 5))))))
+
+let exp3 = Times(Fun(x, IntTy, Times(Fun(y, IntTy, Plus(x, y)), x)), Int(5))
+    
+(* Solution to Part 2 *)
+
+let rec typeof_aux exp list =
+  match exp with
+  | (Id _) -> Some IntTy
+  | (Int _) ->
+     Some IntTy
+  | True | False ->
+     Some BoolTy
+(*  | Plus(x,y) | Minus(x,y) | Times(x,y) | Div(x,y) | Lss(x,y) | Eq(x,y) | Gtr (x,y) -> 
+     if (typeof_aux x) == Some IntTy && (typeof_aux y) == Some IntTy then Some IntTy else None
+  | And(x,y) | Or(x,y) ->
+     if (typeof_aux x) == Some BoolTy && (typeof_aux y) == Some BoolTy then Some BoolTy else None
+  | Cond(x, y, z) ->
+  | Let (str, x, y) | App(x, y)->
+     if (typeof_aux x) == (typeof_aux y) then (typeof_aux x) else None *)
+
+
+(* Solution to Part 3 *)
+
+

@@ -1,0 +1,60 @@
+Note: Your work will be most likely be viewed using an editor. For this
+reason DO NOT assume any special formatting abilities will be at work
+when it is viewed. IN PARTICULAR, PUT IN LINE BREAKS AT REASONABLE
+PLACES AND DO NOT USE TABS.
+
+Solution to Problem 3
+=====================
+
+The definition of the reverse function:
+
+let rec rev lst1 lst2 =
+   match lst1 with
+   |  [] -> lst2
+   |  (h::t) -> rev t (h::lst2)
+
+let reverse lst = in rev lst []
+
+
+Solution to Part (a)
+--------------------
+
+For all lists l1, for all lists l2, (rev l1 l2) = l2 + l1^r
+P(l1) refers to the first variable here
+
+
+Solution to Part (b)
+--------------------
+
+Base Case:
+    P([]) -> (rev [] l2) = l2 + []^r
+    By the definition of rev, if lst1 is [], it returns lst2, so
+    l2 = l2 + []^r, and an empty list reversed is still an empty list,
+    and we know that for all lists l, l + [] is the same as l, so,
+    we now have our equation that looks like:
+    l2 = l2, and since l2 is arbitrary, Base Case Holds
+
+Inductive Step:
+    Assume P(l1)
+    P((h::l1)) -> (rev (h::l1) l2) = l2 + (h::l1)^R
+    We know that by the definition of rev, the left hand side can change to:
+    (rev l1 (h::l2)) = l2 + (h::l1)^R,
+    but we also know that  (x::l1)^R + l2 is the same as l1^R + (x::l2), so,
+    our equation now is:
+    (rev l1 (h::l2)) = (h::l2) + l1^R, and by the induction hypothesis, the left side
+    evaluates to whatever l2 + l1^r evaluates to, so now our equation is
+    (h::l2) + l1^R = (h::l2) + l1^R, and now both sides have the same
+    termination behavior and values, so the Inductive Step is done
+
+
+Solution to Part (c)
+--------------------
+
+The property for reverse to be proved:
+     For all lists l, (reverse l) evaluates to l^R.
+
+For all lists l, (reverse l) evaluates to whatever (rev l []), and since
+we proved, in part 2, that (rev l1 l2) evaluates to l2 + l1^R, we now have
+[] + l^R, and since we know that for all lists l, l + [] is the same as l,
+that becomes just l^R, which makes the equation l^R = l^R, which has
+the same termination behavior and values, proving our property.

@@ -1,0 +1,71 @@
+Note: Your work will be most likely be viewed using an editor. For this
+reason DO NOT assume any special formatting abilities will be at work
+when it is viewed. IN PARTICULAR, PUT IN LINE BREAKS AT REASONABLE
+PLACES AND DO NOT USE TABS.
+
+
+Solution to Problem 2
+=====================
+
+The definitions of the nat type and associated functions:
+
+type nat = Zero | Succ of nat
+
+let rec plusNat x y =
+   match x with
+   | Zero -> y
+   | (Succ x') -> Succ (plusNat x' y)
+
+let rec multNat x y =
+   match x with
+   | Zero -> Zero
+   | (Succ x') -> plusNat y (multNat x' y)
+
+let rec toInt n =
+   match n with
+   | Zero -> 0
+   | (Succ n') -> toInt n' + 1
+
+
+The property that was proved in the video-taped lectures:
+
+    for all n1 of type nat,
+      for all n2 of type nat, toInt (plusNat n1 n2) = (toInt n1) + (toInt n2)
+
+The property that we want to prove in this problem:
+
+   for all n1 of type nat,
+      for all n2 of type nat, toInt (multNat n1 n2) = (toInt n1) * (toInt n2)
+
+
+The proof of the property
+-------------------------
+
+We want to prove
+for all n1 of type nat,
+    for all n2 of type nat, toInt (multNat n1 n2) = (toInt n1) * (toInt n2)
+    Which is P(n1)
+
+Base Case:
+    toInt (multNat Zero n2) = (toInt Zero) * (toInt n2)
+    by the definition of multNat, if x is Zero, then evaluates to Zero. That leaves us with
+    toInt (Zero) = (toInt Zero) * (toInt n2)
+    by the definition of toInt, if n is Zero, then it evaluates to 0, so,
+    0 = 0 * (toInt n2), and since n2 is arbitary, it can be whatever, and anything times 0
+    is 0, so we have 0 = 0.
+    Base Case Holds
+
+Inductive Step:
+    Assume (P(n1))
+    toInt (multNat (Succ n1) n2) = (toInt (Succ n1)) * (toInt n2)
+    by the definition of multNat, we match x with (Succ x') so, it changes to
+    toInt (plusNat n2 (multNat n1 n2)) = (toInt (Succ n1)) * (toInt n2).
+    By the definition of toInt, we match (toInt (Succ n1)) with (Succ n'), so it changes to
+    toInt (plusNat n2 (multNat n1 n2)) = ((toInt n1) * (toInt n2)) + (toInt n2)
+    Since we know that (in the video lectures), for all n1 or type nat, for all n2 of type nat,
+    toInt (plusNat n1 n2) = (toInt n1) + (toInt n2), we change the equation to
+    (toInt n2) + (toInt (multNat n1 n2)) = ((toInt n1) * (toInt n2)) + (toInt n2)
+    and the induction hypothesis of P(n) we are assuming is true, the equation is now
+    (toInt n2) + ((toInt n1) * (toInt n2)) = ((toInt n1) * (toInt n2)) + (toInt n2)
+    Both sides of the equation have the same termination behavior and values, so
+    the Inductive Step is proven

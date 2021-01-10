@@ -1,0 +1,7 @@
+(* Solution to Problem 3, Homework 2, CSci 2041, Spring 2020 *)
+
+First, in an OCaml comment, explain how you will use the option type to fix
+the issue highlighted in homework 1 with the functions in question.
+
+Then write OCaml definitions for the functions that use the described
+solution.

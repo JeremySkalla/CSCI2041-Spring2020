@@ -1,0 +1,75 @@
+ACTUAL SOLUTIONS TO THE PROBLEMS IN LAB 9
+==================================
+
+Note: Your work will be most likely be viewed using an editor. For this
+reason DO NOT assume any special formatting abilities will be at work
+when it is viewed. IN PARTICULAR, PUT IN LINE BREAKS AT REASONABLE
+PLACES AND DO NOT USE TABS.
+
+
+Answer to Problem I
+-------------------
+
+1. For all natural numbers n, (sumup n) evaluates to the sum of all natural
+   numbers from 0 to n
+   Aka: for all natural numbers, P(n)
+2. Base Case: n = 0. 0 = (0*(1))/2 -> 0=0
+   Inductive Step: We assume (sumup n) evaluates to the sum of the numbers from 0 to n
+   We must show that (sum up (n+1)) evaluates to the sum of the numbers from 0 to (n+1)
+   (sumup (n+1)) will evaluate to whatever ((n+1) + (sumup n)) will evaluate to
+   Using the induction hypothesis, ((n+1) + (sumup n)) evaluates to whatever (n+1) + s
+   evaluates to, where s is the sum of the numbers from 0 to n. (n+1) + s must evaluate
+   to the sum of the numbers from 0 to n. From the observations above:
+   (sumup (n+1)) evaluates to the sum of the numbers from 0 to (n+1)
+
+Answer to Problem II
+--------------------
+
+1. For all natural numbers n and acc, (sumup_aux n acc) evaluates the sum of all natural
+   numbers from 0 to n added to acc. We want to show for all natural numbers n, P(n)
+2. Base Case: (sumup_aux 0 acc). Since acc is picked arbitrarily, the statement holds
+   for any choice of acc. The sum of natural numbers from 0 to 0 added to acc is acc,
+   which is the same in our definition of sumup_aux. Therefore, base case is true.
+
+   Inductive Step:
+   (sumup_aux (n+1) acc) = (sumup_aux n ((n+1) + acc)) ->
+   for all acc in ((n+1) + acc), using the induction hypothesis ->
+   sum from 0 to (n+1) + acc = sum from 0 to n + ((n+1) + acc) ->
+   sum from 0 to n + (n+1) + acc = sum from 0 to n + (n+1) + acc
+   Therefore, (sumup_aux (n+1) acc) evalutes to the sum of natural numbers from 0 to (n+1) + acc
+
+
+3. For all natural numbers n, (sumup n) evaluates to the sum of the natural numbers
+   from 0 to n, because (sumup n) evaluates to (sumup_aux n 0), and we've proved that
+   (sumup_aux n 0), by part 2, evaluates to the sum of the natural numbers from
+   0 to n added to acc, which is 0, so just the sum of the natural numbers from 0 to n
+
+Answer to Problem III
+---------------------
+
+For all integer lists l, sumlist(reverse l) = sumlist l
+Base Case: (sumlist (reverse [])) = (sumlist [])
+reversing a [] gives us [] by definition], therefore,
+(sumlist []) = (sumlist []) ->
+Inductive Step: Assume P(l), show that P(h::l) for any h of type int
+(sumlist (h::l)) = (sumlist (reverse (h::l))) -> by the definition of reverse (for right side)
+and the definition of sumlist (for left side)
+((sumlist l) + h) = (sumlist (append(reverse l) [h])) -> by the definition of sumlist
+((sumlist l) + h) = ((sumlist (reverse l)) + h) -> by the inductive hypothesis
+((sumlist l) + h) = ((sumlist l) + h)
+Therefore, the two sides have the same termination behavior and the same value at termination
+
+
+
+Answer to Problem IV
+--------------------
+
+for all t of type ('a btree), for all x of type 'a, for all t' of type ('a btree),
+(if (insert t x) evaluates to t' then
+either minTree t' = minTree t or minTree t' = Some x)
+
+for all t of type ('a btree),  for all x of type 'a, for all t' of type ('a btree),
+(if (insert t x) evaluates to t' then
+either maxTree t' = maxTree t or maxTree t' = Some x)
+
+I'm confused about this one so I'm going to ask in office hours

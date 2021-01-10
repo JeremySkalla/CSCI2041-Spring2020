@@ -1,0 +1,36 @@
+skall034@csel-kh1250-19:/home/skall034 $ ocaml
+        OCaml version 4.05.0
+
+# 2 + 3;;
+- : int = 5
+# 2 +
+  3;;
+- : int = 5
+# let five = 2 + 3;;
+val five : int = 5
+# five ;;
+- : int = 5
+# let plus x y = x + y;;
+val plus : int -> int -> int = <fun>
+# val plus
+  ;;
+Error: Syntax error
+# plus 2 3
+  ;;
+- : int = 5
+# let rec fact n = if (n = 0) then 1 else n * (fact (n - 1)) ;;
+val fact : int -> int = <fun>
+# fact (plus five 1)
+  ;;
+- : int = 720
+# 
+
+skall034@csel-kh1250-21:/home/skall034/csci2041/myfiles/lab01 $ ocaml
+        OCaml version 4.05.0
+
+# #use "lab01.ml";;
+val fib : int -> int = <fun>
+# fib 5;;
+- : int = 5
+
+

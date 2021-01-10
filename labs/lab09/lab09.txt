@@ -1,0 +1,58 @@
+SOLUTIONS TO THE PROBLEMS IN LAB 9
+==================================
+
+Note: Your work will be most likely be viewed using an editor. For this
+reason DO NOT assume any special formatting abilities will be at work
+when it is viewed. IN PARTICULAR, PUT IN LINE BREAKS AT REASONABLE
+PLACES AND DO NOT USE TABS.
+
+
+Answer to Problem I
+-------------------
+
+1. For all natural numbers n, (sumup n) evaluates to (n*(n+1))/2
+2. Base Case: n = 0. 0 = (0*(1))/2 -> 0=0
+
+Inductive Step: Assume sumup(n), showing sumup(n+1)
+n+(n+1) = (n*(n+1)/2)+(n+1)
+n+(n+1) = (n*(n+1)+2*(n+1))/2
+n+(n+1) = (n+1)*(n+2)/2
+
+Answer to Problem II
+--------------------
+
+1. For all natural numbers n and acc, (sumup_aux n a) evaluates to (n*(n+1))/2 + a
+2. Base Case: (sumup_aux 0 0) = (0*(1))/2 + 0 = 0
+Inductive Step: (sumup_aux (n+1) (n+1)) = (n*(n+1)/2)+(n+1)
+??? I'm not sure what to do here honestly
+3. For all natural numbers n, (sumup n) evaluates to (n*(n+1))/2
+
+Answer to Problem III
+---------------------
+
+Replace this text with the proof of the property relating reverse
+and sumlist described in the lab writeup.
+
+For all integer lists l, sumlist(reverse l) = sumlist l
+(I'm going to go with a base case of [x] since you can't sum an empty list)
+Base Case: (sumlist (reverse [x])) = (sumlist [x])
+reversing a single element list gives us the same list, therefore,
+(sumlist [x]) = (sumlist [x]) -> x = x
+Inductive Step: l is (x::l')
+(sumlist (x::l')) = (sumlist (reverse (x::l')))
+(sumlist (x::l')) = (sumlist (l'::x))
+x + l' = l' + x by the commutative property
+
+
+Answer to Problem IV
+--------------------
+
+for all t of type ('a btree), for all x of type 'a, for all t' of type ('a btree),
+(if (insert t x) evaluates to t' then
+either minTree t' = minTree t or minTree t' = Some x)
+
+for all t of type ('a btree),  for all x of type 'a, for all t' of type ('a btree),
+(if (insert t x) evaluates to t' then
+either maxTree t' = maxTree t or maxTree t' = Some x)
+
+I'm confused about this one so I'm going to ask in office hours

@@ -1,0 +1,31 @@
+(* Jeremy Skalla, Lab 4 *)
+
+let rec pairwith x 1 =
+  match 1 with
+  | [] -> []
+  | (h::t) -> (x, h) :: pairwith x t
+
+let rec addN 1 n =
+  match 1 with
+  | [] -> []
+  | (h::t) -> (h+n) :: addN t
+
+let rec addN =
+  function
+  | (_, []) -> []
+  | (n, (h::t)) -> (h+n) :: addN n t
+
+let rec assoc 1 x =
+  match 1 with
+  | [] -> "Not Found"
+  | ((y, v)::t) -> if (x = y) then v else assoc t x
+
+let lengthOfHead 1 =
+  let rec length =
+    function
+    | [] -> 0
+    | (h::t) -> 1 + length t
+    and lengthof1 = length 1
+  in match 1 with
+     | [] -> 0
+     | (h::t) -> length h
